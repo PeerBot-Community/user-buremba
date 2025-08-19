@@ -15,11 +15,15 @@
   "dependencies": {
     "@tanstack/react-router": "^1.131.27",
     "@tanstack/start": "^1.120.20",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "lucide-react": "^0.263.1",
+    "date-fns": "^2.30.0"
+  },
+  "devDependencies": {
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.1",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
     "typescript": "^5.9.2",
     "vite": "^7.1.3"
   }
