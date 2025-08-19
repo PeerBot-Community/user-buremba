@@ -1,0 +1,8 @@
+This is a sample file created for user-buremba.
+
+Date: 2025-08-19
+Repository: https://github.com/PeerBot-Community/user-buremba
+
+This file can be used as a starting point for your projects or as a test file.
+
+Feel free to modify or delete this file as needed.
