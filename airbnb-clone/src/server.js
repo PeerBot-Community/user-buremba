@@ -38,10 +38,10 @@ app.get('/health', (req, res) => {
   res.json({ status: 'healthy', timestamp: new Date().toISOString() });
 });
 
-// Import route modules (to be created)
+// Import route modules
 // app.use('/api/auth', require('./routes/auth'));
 // app.use('/api/properties', require('./routes/properties'));
-// app.use('/api/bookings', require('./routes/bookings'));
+app.use('/api/bookings', require('./routes/bookings'));
 // app.use('/api/users', require('./routes/users'));
 
 // Error handling middleware
