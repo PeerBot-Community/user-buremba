@@ -1,0 +1,8 @@
+Hello World!
+
+This is a sample file created by Claude Code.
+
+Date: 2025-08-20
+Repository: user-buremba
+
+Feel free to modify or delete this file as needed.
