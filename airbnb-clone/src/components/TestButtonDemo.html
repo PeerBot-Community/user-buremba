@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Button Demo</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .title {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .description {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Test Button Component Demo</h1>
+        <p class="description">
+            This demonstrates the Test Button React component with controller integration.
+            Click the button to trigger a test action that communicates with the backend API.
+        </p>
+        <div id="test-button-root"></div>
+    </div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        const TestButton = () => {
+          const [isLoading, setIsLoading] = useState(false);
+          const [response, setResponse] = useState(null);
+
+          const handleTestAction = async () => {
+            setIsLoading(true);
+            try {
+              const res = await fetch('/api/test', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ action: 'test' })
+              });
+              
+              const data = await res.json();
+              setResponse(data);
+            } catch (error) {
+              setResponse({ error: 'Failed to execute test action' });
+            } finally {
+              setIsLoading(false);
+            }
+          };
+
+          return (
+            <div className="test-button-container">
+              <button 
+                onClick={handleTestAction}
+                disabled={isLoading}
+                className="test-button"
+                style={{
+                  padding: '12px 24px',
+                  backgroundColor: '#FF5A5F',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  opacity: isLoading ? 0.6 : 1,
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                {isLoading ? 'Processing...' : 'Test'}
+              </button>
+              
+              {response && (
+                <div 
+                  className="response-display"
+                  style={{
+                    marginTop: '16px',
+                    padding: '12px',
+                    backgroundColor: response.error ? '#ffebee' : '#e8f5e8',
+                    border: `1px solid ${response.error ? '#f44336' : '#4caf50'}`,
+                    borderRadius: '4px',
+                    fontSize: '14px'
+                  }}
+                >
+                  {response.error ? (
+                    <span style={{ color: '#d32f2f' }}>{response.error}</span>
+                  ) : (
+                    <div style={{ color: '#2e7d32' }}>
+                      <strong>Success:</strong> {response.message}
+                      <br/>
+                      <small>Timestamp: {response.timestamp}</small>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        };
+
+        ReactDOM.render(<TestButton />, document.getElementById('test-button-root'));
+    </script>
+</body>
+</html>
