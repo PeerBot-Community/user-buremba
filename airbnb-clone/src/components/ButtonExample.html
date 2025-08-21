@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airbnb Primary Button Examples</title>
+    <style>
+        body {
+            font-family: 'Circular', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+            padding: 20px;
+            background: #FAFAFA;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        h1, h2 {
+            color: #222;
+        }
+        .button-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 16px 0;
+        }
+        .code {
+            background: #f8f8f8;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 14px;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏠 Airbnb Primary Button Component</h1>
+        
+        <div class="section">
+            <h2>Basic Usage</h2>
+            <div class="button-group">
+                <div id="basic-button"></div>
+            </div>
+            <div class="code">
+                Button.create({ text: 'Book Now' })
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Size Variants</h2>
+            <div class="button-group">
+                <div id="small-button"></div>
+                <div id="default-button"></div>
+                <div id="large-button"></div>
+            </div>
+            <div class="code">
+                Button.create({ text: 'Small', size: 'small' })<br>
+                Button.create({ text: 'Default' })<br>
+                Button.create({ text: 'Large', size: 'large' })
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>States</h2>
+            <div class="button-group">
+                <div id="normal-button"></div>
+                <div id="loading-button"></div>
+                <div id="disabled-button"></div>
+            </div>
+            <div class="code">
+                Button.create({ text: 'Normal' })<br>
+                Button.create({ text: 'Loading', loading: true })<br>
+                Button.create({ text: 'Disabled', disabled: true })
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>With Icons</h2>
+            <div class="button-group">
+                <div id="icon-button"></div>
+                <div id="heart-button"></div>
+            </div>
+            <div class="code">
+                Button.create({ text: 'Search', icon: '🔍' })<br>
+                Button.create({ text: 'Add to Wishlist', icon: '❤️' })
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Full Width</h2>
+            <div id="full-width-button"></div>
+            <div class="code">
+                Button.create({ text: 'Reserve', fullWidth: true })
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Interactive Example</h2>
+            <div class="button-group">
+                <div id="interactive-button"></div>
+            </div>
+            <p id="click-count">Clicks: 0</p>
+        </div>
+    </div>
+
+    <script src="Button.js"></script>
+    <script>
+        // Initialize button styles
+        Button.init();
+
+        let clickCount = 0;
+
+        // Create all button examples
+        document.getElementById('basic-button').appendChild(
+            Button.create({ text: 'Book Now' })
+        );
+
+        document.getElementById('small-button').appendChild(
+            Button.create({ text: 'Small', size: 'small' })
+        );
+
+        document.getElementById('default-button').appendChild(
+            Button.create({ text: 'Default' })
+        );
+
+        document.getElementById('large-button').appendChild(
+            Button.create({ text: 'Large', size: 'large' })
+        );
+
+        document.getElementById('normal-button').appendChild(
+            Button.create({ text: 'Normal' })
+        );
+
+        document.getElementById('loading-button').appendChild(
+            Button.create({ text: 'Loading', loading: true })
+        );
+
+        document.getElementById('disabled-button').appendChild(
+            Button.create({ text: 'Disabled', disabled: true })
+        );
+
+        document.getElementById('icon-button').appendChild(
+            Button.create({ text: 'Search', icon: '🔍' })
+        );
+
+        document.getElementById('heart-button').appendChild(
+            Button.create({ text: 'Add to Wishlist', icon: '❤️' })
+        );
+
+        document.getElementById('full-width-button').appendChild(
+            Button.create({ text: 'Reserve', fullWidth: true })
+        );
+
+        document.getElementById('interactive-button').appendChild(
+            Button.create({ 
+                text: 'Click Me!', 
+                onClick: function() {
+                    clickCount++;
+                    document.getElementById('click-count').textContent = `Clicks: ${clickCount}`;
+                }
+            })
+        );
+    </script>
+</body>
+</html>
