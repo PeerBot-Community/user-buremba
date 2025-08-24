@@ -1,0 +1,51 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "john.doe@example.com",
+      "role": "host",
+      "joinedDate": "2024-01-15"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "email": "jane.smith@example.com",
+      "role": "guest",
+      "joinedDate": "2024-02-20"
+    }
+  ],
+  "properties": [
+    {
+      "id": 101,
+      "title": "Cozy Downtown Apartment",
+      "description": "Modern 2-bedroom apartment in the heart of the city",
+      "location": "New York, NY",
+      "price": 150,
+      "hostId": 1,
+      "amenities": ["WiFi", "Kitchen", "AC", "Parking"],
+      "availability": true
+    },
+    {
+      "id": 102,
+      "title": "Beachfront Villa",
+      "description": "Stunning ocean view villa with private beach access",
+      "location": "Miami, FL",
+      "price": 300,
+      "hostId": 1,
+      "amenities": ["WiFi", "Pool", "Beach Access", "BBQ"],
+      "availability": true
+    }
+  ],
+  "bookings": [
+    {
+      "id": 1001,
+      "propertyId": 101,
+      "guestId": 2,
+      "checkIn": "2024-09-01",
+      "checkOut": "2024-09-05",
+      "totalPrice": 600,
+      "status": "confirmed"
+    }
+  ]
+}
