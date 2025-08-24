@@ -1,0 +1,10 @@
+Hello World!
+
+This is a sample file created by Claude Code.
+
+Features:
+- Simple text content
+- Multiple lines
+- Easy to read format
+
+Created on: 2025-08-24
