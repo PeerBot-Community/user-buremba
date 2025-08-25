@@ -1,0 +1,15 @@
+.blog-post {
+  transition: transform 0.2s;
+}
+
+.blog-post:hover {
+  transform: translateY(-4px);
+}
+
+.blog-image {
+  transition: transform 0.3s;
+}
+
+.blog-post:hover .blog-image {
+  transform: scale(1.05);
+}
