@@ -1,0 +1,12 @@
+{
+  "name": "c1376e68-3543-4156-8e75-9d0319ff8a8a",
+  "version": "1.0.0",
+  "description": "Personal workspace for user-buremba - Claude Code Slack Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
