@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 const TestButton = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
 
-  const handleTestAction = async () => {
+  const handleTestAction = async (option) => {
+    setSelectedOption(option);
     setIsLoading(true);
     try {
       const res = await fetch('/api/test', {
@@ -12,7 +14,7 @@ const TestButton = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ action: 'test' })
+        body: JSON.stringify({ action: 'test', option })
       });
       
       const data = await res.json();
@@ -26,24 +28,27 @@ const TestButton = () => {
 
   return (
     <div className="test-button-container">
-      <button 
-        onClick={handleTestAction}
-        disabled={isLoading}
-        className="test-button"
-        style={{
-          padding: '12px 24px',
-          backgroundColor: '#FF5A5F',
-          color: 'white',
-          border: 'none',
-          borderRadius: '8px',
-          fontSize: '16px',
-          fontWeight: '600',
-          cursor: isLoading ? 'not-allowed' : 'pointer',
-          opacity: isLoading ? 0.6 : 1,
-          transition: 'all 0.3s ease'
-        }}
-      >
-        {isLoading ? 'Processing...' : 'Test'}
+      {['Option 1', 'Option 2', 'Option 3'].map((option) => (
+        <button 
+          key={option}
+          onClick={() => handleTestAction(option)}
+          disabled={isLoading}
+          className="test-button"
+          style={{
+            padding: '12px 24px',
+            backgroundColor: selectedOption === option ? '#E61E4D' : '#FF5A5F',
+            color: 'white',
+            border: 'none',
+            borderRadius: '8px',
+            fontSize: '16px',
+            fontWeight: '600',
+            cursor: isLoading ? 'not-allowed' : 'pointer',
+            opacity: isLoading ? 0.6 : 1,
+            transition: 'all 0.3s ease',
+            margin: '0 8px'
+          }}
+        >
+          {isLoading && selectedOption === option ? 'Processing...' : option}
       </button>
       
       {response && (
