@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Hours</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .title {
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Welcome to Our Store</h1>
+        <div id="store-hours-root" class="section"></div>
+        <div id="test-button-root" class="section"></div>
+    </div>
+
+    <script type="text/babel">
+        const StoreHours = () => {
+          const hours = [
+            { day: 'Monday', hours: '9:00 AM - 8:00 PM' },
+            { day: 'Tuesday', hours: '9:00 AM - 8:00 PM' },
+            { day: 'Wednesday', hours: '9:00 AM - 8:00 PM' },
+            { day: 'Thursday', hours: '9:00 AM - 8:00 PM' },
+            { day: 'Friday', hours: '9:00 AM - 9:00 PM' },
+            { day: 'Saturday', hours: '10:00 AM - 9:00 PM' },
+            { day: 'Sunday', hours: '10:00 AM - 7:00 PM' }
+          ];
+
+          return (
+            <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
+              <h2 style={{ color: '#FF5A5F', marginBottom: '20px' }}>Store Hours</h2>
+              <div style={{ 
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '10px',
+                backgroundColor: '#fff',
+                borderRadius: '12px',
+                padding: '20px',
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+              }}>
+                {hours.map((item, index) => (
+                  <div key={item.day} style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '10px',
+                    backgroundColor: index % 2 === 0 ? '#f7f7f7' : '#fff',
+                    borderRadius: '6px'
+                  }}>
+                    <span style={{ fontWeight: '500' }}>{item.day}</span>
+                    <span>{item.hours}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        };
+
+        const TestButton = () => {
+          const [isLoading, setIsLoading] = useState(false);
+          const [response, setResponse] = useState(null);
+
+          const handleTestAction = async () => {
+            setIsLoading(true);
+            try {
+              const res = await fetch('/api/test', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ action: 'test' })
+              });
+              
+              const data = await res.json();
+              setResponse(data);
+            } catch (error) {
+              setResponse({ error: 'Failed to execute test action' });
+            } finally {
+              setIsLoading(false);
+            }
+          };
+
+          return (
+            <div style={{ maxWidth: '600px', margin: '0 auto', textAlign: 'center' }}>
+              <button 
+                onClick={handleTestAction}
+                disabled={isLoading}
+                style={{
+                  padding: '12px 24px',
+                  backgroundColor: '#FF5A5F',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '8px',
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  opacity: isLoading ? 0.6 : 1,
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                {isLoading ? 'Processing...' : 'Test'}
+              </button>
+              
+              {response && (
+                <div style={{
+                  marginTop: '16px',
+                  padding: '12px',
+                  backgroundColor: response.error ? '#ffebee' : '#e8f5e8',
+                  border: `1px solid ${response.error ? '#f44336' : '#4caf50'}`,
+                  borderRadius: '4px',
+                  fontSize: '14px'
+                }}>
+                  {response.error ? (
+                    <span style={{ color: '#d32f2f' }}>{response.error}</span>
+                  ) : (
+                    <div style={{ color: '#2e7d32' }}>
+                      <strong>Success:</strong> {response.message}
+                      <br/>
+                      <small>Timestamp: {response.timestamp}</small>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        };
+
+        const { useState } = React;
+        
+        ReactDOM.render(<StoreHours />, document.getElementById('store-hours-root'));
+        ReactDOM.render(<TestButton />, document.getElementById('test-button-root'));
+    </script>
+</body>
+</html>
