@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pet Photo Gallery Demo</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const PhotoGallery = ({ photos }) => {
+          return (
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+              gap: '1rem',
+              padding: '1rem'
+            }}>
+              {photos?.map((photo, index) => (
+                <div key={index} style={{
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                }}>
+                  <img 
+                    src={photo.url} 
+                    alt={photo.caption || `Pet photo ${index + 1}`}
+                    style={{
+                      width: '100%',
+                      height: '200px',
+                      objectFit: 'cover'
+                    }}
+                  />
+                  {photo.caption && (
+                    <p style={{
+                      margin: '0.5rem',
+                      fontSize: '0.9rem',
+                      color: '#666'
+                    }}>
+                      {photo.caption}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          );
+        };
+
+        const demoPhotos = [
+          {
+            url: 'https://images.unsplash.com/photo-1543466835-00a7907e9de1',
+            caption: 'Adorable golden retriever puppy'
+          },
+          {
+            url: 'https://images.unsplash.com/photo-1548681528-6a5c45b66b42',
+            caption: 'Playful kitten'
+          },
+          {
+            url: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e',
+            caption: 'Happy dog in the park'
+          }
+        ];
+
+        const App = () => {
+          return (
+            <div>
+              <h1 style={{ textAlign: 'center', color: '#333' }}>Pet Photo Gallery</h1>
+              <PhotoGallery photos={demoPhotos} />
+            </div>
+          );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

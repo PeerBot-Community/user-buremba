@@ -40,6 +40,7 @@ app.get('/health', (req, res) => {
 
 // Import route modules
 app.use('/api', require('./routes/testRoutes'));
+app.use('/api', require('./routes/photoRoutes'));
 // app.use('/api/auth', require('./routes/auth'));
 // app.use('/api/properties', require('./routes/properties'));
 // app.use('/api/bookings', require('./routes/bookings'));
