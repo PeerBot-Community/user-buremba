@@ -55,7 +55,7 @@ app.use((err, req, res, next) => {
 });
 
 // 404 handler
-app.use('/:path(*)', (req, res) => {
+app.all('*', (req, res) => {
   res.status(404).json({ message: 'Route not found' });
 });
 
